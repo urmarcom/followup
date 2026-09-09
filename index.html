@@ -1,0 +1,1667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSC Follow Up Hub</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --bg:#F3F5F3;
+    --surface:#FFFFFF;
+    --surface-2:#EBF1EE;
+    --border:#DCE4DE;
+    --border-soft:#E6ECE8;
+    --ink:#172321;
+    --ink-2:#55635E;
+    --ink-3:#89948E;
+    --accent:#1F5C52;
+    --accent-2:#163F39;
+    --accent-soft:#DCEEE9;
+    --accent-soft-ink:#12433C;
+    --warn-bg:#FBF1DC;
+    --warn-ink:#7A5417;
+    --warn-border:#EAD8AA;
+    --success:#2E7D4F;
+    --success-bg:#E4F3E9;
+    --success-border:#BFE2CC;
+    --danger:#B3413A;
+    --danger-bg:#FBEAE8;
+    --danger-border:#F0CBC7;
+    --shadow-sm:0 1px 2px rgba(23,35,33,0.06);
+    --shadow-md:0 6px 20px rgba(23,35,33,0.08);
+    --shadow-lg:0 20px 60px rgba(23,35,33,0.18);
+    --radius:14px;
+    --radius-sm:9px;
+    --cat-1-ink:#1F5C52; --cat-1-bg:#DCEEE9;
+    --cat-2-ink:#33507A; --cat-2-bg:#E1E7F0;
+    --cat-3-ink:#6B3F63; --cat-3-bg:#EEE1EC;
+    --cat-4-ink:#8A5A2B; --cat-4-bg:#F1E6D6;
+    --cat-5-ink:#3B6B78; --cat-5-bg:#DCEBEE;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121815;
+      --surface:#182420;
+      --surface-2:#1E2B26;
+      --border:#2B3A34;
+      --border-soft:#25322C;
+      --ink:#EDF3F0;
+      --ink-2:#A3B3AC;
+      --ink-3:#728179;
+      --accent:#5AC9B2;
+      --accent-2:#7BDBC5;
+      --accent-soft:#1D3A34;
+      --accent-soft-ink:#8FE0CC;
+      --warn-bg:#2E2712; --warn-ink:#E8C97A; --warn-border:#4A3D1C;
+      --success:#6FE3A0; --success-bg:#16301F; --success-border:#255238;
+      --danger:#F0938B; --danger-bg:#34191A; --danger-border:#552624;
+      --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
+      --shadow-md:0 6px 20px rgba(0,0,0,0.35);
+      --shadow-lg:0 24px 60px rgba(0,0,0,0.55);
+      --cat-1-ink:#7BDBC5; --cat-1-bg:#1D3A34;
+      --cat-2-ink:#9FB3DD; --cat-2-bg:#212C42;
+      --cat-3-ink:#DCA8CF; --cat-3-bg:#3A2438;
+      --cat-4-ink:#E8B77C; --cat-4-bg:#3A2C18;
+      --cat-5-ink:#8ED0DE; --cat-5-bg:#1A3238;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121815;
+    --surface:#182420;
+    --surface-2:#1E2B26;
+    --border:#2B3A34;
+    --border-soft:#25322C;
+    --ink:#EDF3F0;
+    --ink-2:#A3B3AC;
+    --ink-3:#728179;
+    --accent:#5AC9B2;
+    --accent-2:#7BDBC5;
+    --accent-soft:#1D3A34;
+    --accent-soft-ink:#8FE0CC;
+    --warn-bg:#2E2712; --warn-ink:#E8C97A; --warn-border:#4A3D1C;
+    --success:#6FE3A0; --success-bg:#16301F; --success-border:#255238;
+    --danger:#F0938B; --danger-bg:#34191A; --danger-border:#552624;
+    --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
+    --shadow-md:0 6px 20px rgba(0,0,0,0.35);
+    --shadow-lg:0 24px 60px rgba(0,0,0,0.55);
+    --cat-1-ink:#7BDBC5; --cat-1-bg:#1D3A34;
+    --cat-2-ink:#9FB3DD; --cat-2-bg:#212C42;
+    --cat-3-ink:#DCA8CF; --cat-3-bg:#3A2438;
+    --cat-4-ink:#E8B77C; --cat-4-bg:#3A2C18;
+    --cat-5-ink:#8ED0DE; --cat-5-bg:#1A3238;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    font-size:14.5px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:"Fraunces",Georgia,"Times New Roman",serif;
+    font-weight:600;letter-spacing:-0.01em;text-wrap:balance;
+    color:var(--ink);margin:0;
+  }
+  .mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;}
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:10.5px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;
+    color:var(--ink-3);
+  }
+  button{font-family:inherit;}
+  a{color:inherit;}
+  ::selection{background:var(--accent-soft);color:var(--accent-soft-ink);}
+  .icon{width:16px;height:16px;flex:none;display:block;}
+  .icon-lg{width:20px;height:20px;}
+  svg{overflow:visible;}
+
+  /* ---------- layout shell ---------- */
+  #app{min-height:100vh;display:flex;flex-direction:column;}
+
+  .app-header{
+    position:sticky;top:0;z-index:40;
+    display:flex;align-items:center;gap:18px;
+    padding:13px 24px;background:color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .brand{
+    display:flex;align-items:center;gap:9px;cursor:pointer;flex:none;
+    background:none;border:none;padding:0;color:inherit;
+  }
+  .brand-mark{
+    width:30px;height:30px;border-radius:9px;background:var(--accent);
+    color:var(--surface);display:flex;align-items:center;justify-content:center;
+    font-family:"Fraunces",serif;font-weight:600;font-size:15px;flex:none;
+  }
+  .brand-name{font-family:"Fraunces",serif;font-weight:600;font-size:16px;white-space:nowrap;}
+  .brand-name span{color:var(--ink-2);font-weight:500;}
+
+  .search-wrap{position:relative;flex:1;max-width:480px;}
+  .search-input{
+    width:100%;padding:9px 14px 9px 36px;border-radius:10px;
+    border:1px solid var(--border);background:var(--surface-2);color:var(--ink);
+    font-size:13.5px;outline:none;transition:border-color .15s, background .15s;
+  }
+  .search-input:focus{border-color:var(--accent);background:var(--surface);}
+  .search-wrap .icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none;}
+  .search-results{
+    position:absolute;top:calc(100% + 8px);left:0;right:0;
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    box-shadow:var(--shadow-lg);max-height:420px;overflow-y:auto;z-index:50;
+  }
+  .search-results .sr-empty{padding:22px 16px;text-align:center;color:var(--ink-3);font-size:13px;}
+  .sr-item{
+    display:block;width:100%;text-align:left;padding:11px 14px;background:none;border:none;
+    border-bottom:1px solid var(--border-soft);cursor:pointer;color:inherit;
+  }
+  .sr-item:last-child{border-bottom:none;}
+  .sr-item:hover{background:var(--surface-2);}
+  .sr-item-top{display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap;}
+  .sr-snippet{font-size:12.5px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+  .sr-snippet mark{background:var(--accent-soft);color:var(--accent-soft-ink);border-radius:3px;padding:0 1px;}
+
+  .header-right{display:flex;align-items:center;gap:12px;margin-left:auto;flex:none;}
+  .sync-badge{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-3);white-space:nowrap;}
+  .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--success);flex:none;}
+  .sync-dot.local{background:var(--ink-3);}
+
+  .mode-toggle{
+    display:flex;padding:3px;border-radius:10px;background:var(--surface-2);border:1px solid var(--border);flex:none;
+  }
+  .mode-toggle button{
+    border:none;background:none;padding:6px 13px;border-radius:8px;font-size:12.5px;font-weight:600;
+    color:var(--ink-2);cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;
+  }
+  .mode-toggle button.active{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm);}
+  .mode-toggle button.active.admin-active{background:var(--accent);color:var(--surface);}
+
+  .admin-banner{
+    background:var(--accent-soft);color:var(--accent-soft-ink);font-size:12.5px;
+    padding:8px 24px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border-soft);
+  }
+  .admin-banner .icon{flex:none;}
+
+  .view{flex:1;width:100%;}
+
+  /* ---------- home ---------- */
+  .home-wrap{max-width:1080px;margin:0 auto;padding:64px 24px 90px;}
+  .home-hero{text-align:center;margin-bottom:44px;}
+  .home-hero .eyebrow{justify-content:center;display:flex;margin-bottom:14px;}
+  .home-hero h1{font-size:clamp(30px,4vw,42px);margin-bottom:10px;}
+  .home-hero p{color:var(--ink-2);font-size:15.5px;max-width:480px;margin:0 auto 26px;}
+  .home-search{max-width:520px;margin:0 auto;}
+  .home-search .search-input{padding:13px 16px 13px 42px;font-size:14.5px;border-radius:12px;}
+  .home-search .icon{left:15px;}
+
+  .category-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px;
+  }
+  .category-card{
+    text-align:left;border:1px solid var(--border);background:var(--surface);border-radius:var(--radius);
+    padding:22px;cursor:pointer;display:flex;flex-direction:column;gap:14px;
+    transition:border-color .15s, transform .15s, box-shadow .15s;
+  }
+  .category-card:hover{border-color:var(--accent);box-shadow:var(--shadow-md);transform:translateY(-2px);}
+  .cat-tag{
+    display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:100px;
+    font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.04em;width:fit-content;
+  }
+  .category-card h2{font-size:22px;margin-bottom:4px;}
+  .category-card .cat-sub{color:var(--ink-2);font-size:13px;}
+  .cat-meta{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:8px;border-top:1px solid var(--border-soft);font-size:12px;color:var(--ink-3);}
+  .cat-meta strong{color:var(--ink-2);font-weight:600;}
+
+  /* ---------- category view shell ---------- */
+  .cat-shell{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  .sidebar{
+    width:230px;flex:none;position:sticky;top:64px;padding:26px 14px 40px 24px;
+    display:flex;flex-direction:column;gap:2px;align-self:flex-start;
+    max-height:calc(100vh - 64px);overflow-y:auto;
+  }
+  .sidebar-link{
+    display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;
+    border:none;background:none;cursor:pointer;text-align:left;color:var(--ink-2);font-size:13.5px;font-weight:500;
+  }
+  .sidebar-link:hover{background:var(--surface-2);color:var(--ink);}
+  .sidebar-link.active{background:var(--accent-soft);color:var(--accent-soft-ink);font-weight:600;}
+  .sidebar-divider{height:1px;background:var(--border-soft);margin:10px 4px;}
+  .sidebar-heading{padding:6px 12px 4px;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;color:var(--ink-3);text-transform:uppercase;}
+  .sidebar-dot{width:8px;height:8px;border-radius:50%;flex:none;}
+
+  .cat-main{flex:1;min-width:0;padding:26px 28px 90px;}
+  .cat-header{margin-bottom:22px;}
+  .breadcrumb{font-size:12.5px;color:var(--ink-3);margin-bottom:10px;}
+  .breadcrumb button{background:none;border:none;color:var(--ink-3);cursor:pointer;padding:0;font-size:12.5px;}
+  .breadcrumb button:hover{color:var(--accent);}
+  .cat-header-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .cat-header h1{font-size:27px;}
+  .cat-header .cat-sub{color:var(--ink-2);font-size:13.5px;margin-top:4px;}
+
+  .day-rail{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 4px;align-items:center;}
+  .day-pill{
+    display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:100px;
+    border:1px solid var(--border);background:var(--surface);cursor:pointer;font-size:13px;font-weight:600;
+    color:var(--ink-2);white-space:nowrap;
+  }
+  .day-pill:hover{border-color:var(--accent);color:var(--ink);}
+  .day-pill.active{background:var(--accent);border-color:var(--accent);color:var(--surface);}
+  .day-pill .count{opacity:.75;font-weight:500;font-size:11.5px;}
+  .day-pill .pill-admin-btn{opacity:.7;display:inline-flex;padding:1px;border-radius:4px;}
+  .day-pill .pill-admin-btn:hover{opacity:1;background:rgba(0,0,0,0.12);}
+  .day-add-btn{
+    display:flex;align-items:center;gap:5px;padding:7px 12px;border-radius:100px;
+    border:1px dashed var(--border);background:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--accent);
+  }
+  .day-add-btn:hover{background:var(--accent-soft);}
+
+  .chip-row{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0 22px;}
+  .chip{
+    padding:5px 12px;border-radius:100px;border:1px solid var(--border);background:var(--surface);
+    font-size:12px;font-weight:500;color:var(--ink-2);cursor:pointer;
+  }
+  .chip:hover{border-color:var(--accent);}
+  .chip.active{background:var(--ink);border-color:var(--ink);color:var(--bg);}
+
+  .day-group-heading{
+    display:flex;align-items:center;gap:10px;margin:30px 0 14px;
+  }
+  .day-group-heading:first-child{margin-top:6px;}
+  .day-group-heading h3{font-size:15px;}
+  .day-group-heading .line{flex:1;height:1px;background:var(--border);}
+
+  .template-list{display:flex;flex-direction:column;gap:16px;max-width:760px;}
+
+  /* ---------- template card ---------- */
+  .template-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px 22px;position:relative;
+  }
+  .template-card.flash{animation:flash 1.6s ease;}
+  @keyframes flash{
+    0%{box-shadow:0 0 0 3px var(--accent);} 70%{box-shadow:0 0 0 3px var(--accent);} 100%{box-shadow:none;}
+  }
+  .tc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
+  .tc-top-left{display:flex;flex-direction:column;gap:6px;min-width:0;}
+  .tc-title{font-family:"Fraunces",serif;font-weight:600;font-size:16.5px;}
+  .purpose-tag{
+    display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;
+    background:var(--accent-soft);color:var(--accent-soft-ink);font-size:11px;font-weight:600;width:fit-content;
+  }
+  .tc-admin-actions{display:flex;gap:4px;flex:none;}
+  .icon-btn{
+    width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:var(--surface);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink-2);flex:none;
+  }
+  .icon-btn:hover{background:var(--surface-2);color:var(--ink);}
+  .icon-btn.danger:hover{background:var(--danger-bg);color:var(--danger);border-color:var(--danger-border);}
+
+  .internal-note{
+    display:flex;gap:9px;background:var(--warn-bg);border:1px dashed var(--warn-border);color:var(--warn-ink);
+    border-radius:9px;padding:10px 12px;margin-bottom:14px;font-size:12.5px;line-height:1.5;
+  }
+  .internal-note .icon{margin-top:1px;flex:none;color:var(--warn-ink);}
+  .internal-note b{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;display:block;margin-bottom:3px;text-transform:uppercase;}
+
+  .message-block{position:relative;margin-bottom:14px;}
+  .message-block-label{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;}
+  .message-box{
+    background:var(--surface-2);border:1px solid var(--border-soft);border-radius:10px;
+    padding:13px 15px;white-space:pre-wrap;word-wrap:break-word;font-size:13.5px;line-height:1.65;color:var(--ink);
+  }
+  .message-box.placeholder{color:var(--ink-3);font-style:italic;}
+  .copy-btn{
+    display:flex;align-items:center;gap:6px;padding:6px 13px;border-radius:8px;border:1px solid var(--accent);
+    background:var(--accent);color:var(--surface);font-size:12.5px;font-weight:600;cursor:pointer;flex:none;
+    transition:background .15s,border-color .15s,color .15s;
+  }
+  .copy-btn:hover{background:var(--accent-2);border-color:var(--accent-2);}
+  .copy-btn.copied{background:var(--success-bg);border-color:var(--success-border);color:var(--success);}
+
+  .media-row{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:14px;}
+  .img-thumb{
+    width:74px;height:74px;border-radius:9px;overflow:hidden;border:1px solid var(--border);cursor:pointer;
+    position:relative;background:var(--surface-2);flex:none;
+  }
+  .img-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .img-thumb .rm-btn{
+    position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:5px;background:rgba(0,0,0,.55);
+    color:#fff;border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+  .img-add-tile{
+    width:74px;height:74px;border-radius:9px;border:1px dashed var(--border);background:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;color:var(--ink-3);flex:none;
+  }
+  .img-add-tile:hover{border-color:var(--accent);color:var(--accent);}
+  .no-media-note{font-size:12px;color:var(--ink-3);margin-bottom:14px;}
+
+  .send-order{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .send-order .eyebrow{margin-right:2px;}
+  .send-step{
+    display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:100px;background:var(--surface-2);
+    border:1px solid var(--border-soft);font-size:11.5px;font-weight:600;color:var(--ink-2);
+  }
+  .send-step .step-n{color:var(--ink-3);font-family:"IBM Plex Mono",monospace;font-weight:600;}
+  .send-arrow{color:var(--ink-3);}
+
+  .empty-state{
+    border:1px dashed var(--border);border-radius:var(--radius);padding:44px 24px;text-align:center;
+    color:var(--ink-2);max-width:760px;
+  }
+  .empty-state .icon-lg{margin:0 auto 12px;color:var(--ink-3);}
+  .empty-state h3{font-size:16px;margin-bottom:6px;}
+  .empty-state p{font-size:13px;color:var(--ink-3);margin-bottom:16px;}
+
+  .admin-add-row{margin-top:6px;}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:7px;padding:8px 15px;border-radius:9px;font-size:13px;
+    font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--ink);
+  }
+  .btn:hover{background:var(--surface-2);}
+  .btn-primary{background:var(--accent);border-color:var(--accent);color:var(--surface);}
+  .btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2);}
+  .btn-ghost{border-color:transparent;background:none;}
+  .btn-ghost:hover{background:var(--surface-2);}
+  .btn-danger{background:var(--danger-bg);border-color:var(--danger-border);color:var(--danger);}
+  .btn-danger:hover{background:var(--danger-border);}
+  .btn-sm{padding:6px 12px;font-size:12px;}
+  .btn-block{width:100%;justify-content:center;}
+
+  /* ---------- modal ---------- */
+  .overlay{
+    position:fixed;inset:0;background:rgba(15,20,18,0.5);display:flex;align-items:flex-start;justify-content:center;
+    z-index:100;padding:5vh 20px;overflow-y:auto;
+  }
+  .modal{
+    background:var(--surface);border-radius:16px;box-shadow:var(--shadow-lg);width:100%;max-width:600px;
+    padding:26px 26px 22px;margin-bottom:5vh;
+  }
+  .modal h2{font-size:19px;margin-bottom:4px;}
+  .modal .modal-sub{color:var(--ink-2);font-size:12.5px;margin-bottom:18px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:12px;font-weight:600;color:var(--ink-2);margin-bottom:6px;}
+  .field .hint{font-weight:400;color:var(--ink-3);}
+  .field input[type=text], .field textarea, .field select{
+    width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg);
+    color:var(--ink);font-size:13.5px;font-family:inherit;outline:none;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{border-color:var(--accent);}
+  .field textarea{resize:vertical;min-height:90px;line-height:1.55;}
+  .field-row{display:flex;gap:12px;}
+  .field-row .field{flex:1;}
+  .msg-editor{display:flex;flex-direction:column;gap:10px;}
+  .msg-editor-row{display:flex;gap:8px;align-items:flex-start;}
+  .msg-editor-row textarea{flex:1;min-height:72px;}
+  .msg-editor-row .se-btns{display:flex;flex-direction:column;gap:3px;padding-top:2px;}
+  .send-editor{display:flex;flex-direction:column;gap:6px;}
+  .send-editor-row{
+    display:flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid var(--border-soft);
+    border-radius:8px;background:var(--surface-2);
+  }
+  .send-editor-row .se-label{flex:1;font-size:12.5px;font-weight:600;}
+  .send-editor-row .se-btns{display:flex;gap:3px;}
+  .send-editor-row .se-btns button, .msg-editor-row .se-btns button{
+    width:22px;height:22px;border-radius:5px;border:none;background:none;cursor:pointer;color:var(--ink-3);
+    display:flex;align-items:center;justify-content:center;flex:none;
+  }
+  .send-editor-row .se-btns button:hover, .msg-editor-row .se-btns button:hover{background:var(--border-soft);color:var(--ink);}
+  .add-step-row{display:flex;gap:8px;margin-top:4px;}
+  .modal-img-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:22px;}
+  .modal-close{position:absolute;}
+  .modal-head{display:flex;justify-content:space-between;align-items:flex-start;}
+
+  /* confirm dialog */
+  .confirm-modal{max-width:400px;}
+  .confirm-modal p{font-size:13.5px;color:var(--ink-2);margin:0 0 20px;line-height:1.55;}
+
+  /* lightbox */
+  .lightbox-overlay{
+    position:fixed;inset:0;background:rgba(10,14,13,0.85);z-index:110;display:flex;align-items:center;
+    justify-content:center;padding:5vh 24px;
+  }
+  .lightbox-overlay img{max-width:100%;max-height:88vh;border-radius:8px;box-shadow:var(--shadow-lg);}
+  .lightbox-close{
+    position:absolute;top:24px;right:28px;width:38px;height:38px;border-radius:100px;background:rgba(255,255,255,.12);
+    border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+  .lightbox-nav{
+    position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:100px;
+    background:rgba(255,255,255,.12);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  }
+  .lightbox-nav.prev{left:20px;} .lightbox-nav.next{right:20px;}
+
+  /* toast */
+  .toast{
+    position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+    padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:120;box-shadow:var(--shadow-lg);
+    display:flex;align-items:center;gap:8px;max-width:min(90vw,420px);
+  }
+  .toast-error{background:var(--danger);color:#fff;}
+
+  .mobile-day-scroll{overflow-x:auto;}
+
+  @media (max-width: 880px){
+    .cat-shell{flex-direction:column;}
+    .sidebar{
+      position:static;width:100%;flex-direction:row;flex-wrap:nowrap;overflow-x:auto;padding:14px 16px;
+      max-height:none;border-bottom:1px solid var(--border-soft);gap:6px;
+    }
+    .sidebar-divider{display:none;}
+    .sidebar-heading{display:none;}
+    .sidebar-link{white-space:nowrap;}
+    .cat-main{padding:20px 16px 70px;}
+    .category-grid{grid-template-columns:1fr;}
+    .app-header{flex-wrap:wrap;padding:12px 16px;}
+    .search-wrap{order:3;max-width:none;flex-basis:100%;}
+    .header-right{margin-left:auto;}
+  }
+  @media (max-width: 520px){
+    .field-row{flex-direction:column;}
+    .home-wrap{padding:44px 16px 70px;}
+  }
+
+  [hidden]{display:none !important;}
+</style>
+
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============================= ICONS ============================= */
+  const ICONS = {
+    search:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.6" y2="16.6"/></svg>',
+    copy:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8.5a2 2 0 0 0 2 2h2.5"/></svg>',
+    check:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12.5 9.5 18 20 6"/></svg>',
+    image:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.7"/><path d="M4.5 16.5 9 12l3 3 3.5-4L19.5 17"/></svg>',
+    message:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h16v11H9l-4 3.5v-3.5H4z"/></svg>',
+    eyeoff:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.2A10.4 10.4 0 0 1 12 5c5 0 9 4 10.5 7-.6 1.2-1.5 2.5-2.7 3.7M6.2 6.2C4 7.7 2.4 9.7 1.5 12c1.5 3 5.5 7 10.5 7 1.6 0 3-.3 4.3-.9"/><path d="M9.5 10a3.2 3.2 0 0 0 4.5 4.5"/></svg>',
+    plus:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+    pencil:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l.9-3.9L16.6 4.4a1.8 1.8 0 0 1 2.5 0l1 1a1.8 1.8 0 0 1 0 2.5L8.4 19.6z"/><path d="M14.5 6.5l3.5 3.5"/></svg>',
+    trash:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 7h15M9.5 7V5a1.5 1.5 0 0 1 1.5-1.5h2A1.5 1.5 0 0 1 14.5 5v2M18 7l-.8 12a2 2 0 0 1-2 1.9H8.8a2 2 0 0 1-2-1.9L6 7"/></svg>',
+    x:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>',
+    up:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 14.5 12 8.5 18 14.5"/></svg>',
+    down:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9.5 12 15.5 18 9.5"/></svg>',
+    home:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5 12 4l8 7.5"/><path d="M6 10v9.5h12V10"/></svg>',
+    chevronL:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 5 8 12 15 19"/></svg>',
+    chevronR:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 5 16 12 9 19"/></svg>',
+    shield:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l7 2.6v5.4c0 4.6-3 8.1-7 9-4-.9-7-4.4-7-9V6.1z"/></svg>',
+    userIcon:'<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.3" r="3.3"/><path d="M5 19.5c1.3-3.3 4-5 7-5s5.7 1.7 7 5"/></svg>',
+    arrowShort:'<svg class="icon" viewBox="0 0 24 24" width="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="12" x2="18" y2="12"/><polyline points="13 7 18 12 13 17"/></svg>',
+    inbox:'<svg class="icon icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5h4.2l1.4 2.6h4.8l1.4-2.6H20"/><path d="M6 5.5h12L20 12.5v5A1.8 1.8 0 0 1 18.2 19.3H5.8A1.8 1.8 0 0 1 4 17.5v-5z"/></svg>',
+  };
+
+  /* ============================= DATA ============================= */
+  const CATEGORY_DEFS = [
+    { id:"399-new", name:"399 NEW", subtitle:"New customer follow-up flow", tone:1, unitLabel:"Day" },
+    { id:"399-followup", name:"399 FOLLOW UP", subtitle:"Existing RM399 customer follow-up", tone:2, unitLabel:"Day" },
+    { id:"199-ex-promo", name:"199 EX PROMO", subtitle:"Previous promotion follow-up", tone:3, unitLabel:"Day" },
+    { id:"urap-198", name:"URAP 198", subtitle:"URAP customer follow-up", tone:4, unitLabel:"Day" },
+    { id:"qna", name:"QNA", subtitle:"Frequently asked customer questions", tone:5, unitLabel:"Question" },
+  ];
+
+  /* Most categories group templates by "Day" (Day 1, Day 2...). QNA has no
+     follow-up sequence — it groups by individual "Question" instead. This
+     resolves the right word per category so all the admin buttons, labels
+     and empty-states read naturally either way. */
+  function unitLabelOf(catId){
+    const def = CATEGORY_DEFS.find(c => c.id === catId);
+    return (def && def.unitLabel) || "Day";
+  }
+  function unitLabelPluralOf(catId){
+    return unitLabelOf(catId) + "s";
+  }
+
+  function placeholderTemplate(categoryId, n){
+    return {
+      id: categoryId + "-seed-" + n,
+      categoryId: categoryId,
+      day: unitLabelOf(categoryId) + " 1",
+      purpose: "[Purpose will be added here]",
+      internalNote: "",
+      messages: ["[Follow up template will be added here]"],
+      imageIds: [],
+      sendOrder: ["message"],
+      order: n,
+    };
+  }
+
+  function defaultData(){
+    const templates = [];
+    CATEGORY_DEFS.forEach(c => templates.push(placeholderTemplate(c.id, 1)));
+    return {
+      categories: CATEGORY_DEFS.map(c => ({ id:c.id, name:c.name, subtitle:c.subtitle, tone:c.tone, unitLabel:c.unitLabel })),
+      templates: templates,
+      images: {},
+    };
+  }
+
+  /* ============================= STATE ============================= */
+  let state = loadLocalCache() || defaultData();
+  if(!state.images) state.images = {}; // backward compat with older cached state
+  let useDb = false;
+  let db = null;
+
+  let view = "home";           // "home" | "category" | "search"
+  let currentCategoryId = null;
+  let currentDay = null;       // null = not yet set ; "__all__" = all days
+  let purposeFilter = null;
+  let searchQuery = "";
+  let searchOpen = false;
+  let modal = null;            // {type:'template'|'confirm', ...}
+  let lightbox = null;         // {images:[], index:0}
+  let toastTimer = null;
+
+  function loadLocalCache(){
+    try{
+      const raw = localStorage.getItem("csc_hub_cache_v2");
+      if(!raw) return null;
+      const parsed = JSON.parse(raw);
+      if(parsed && Array.isArray(parsed.categories) && Array.isArray(parsed.templates)) return parsed;
+    }catch(e){}
+    return null;
+  }
+  function saveLocalCache(){
+    try{ localStorage.setItem("csc_hub_cache_v2", JSON.stringify(state)); }catch(e){}
+  }
+
+  /* ============================= DB WIRING ============================= */
+  function seedDb(){
+    const seed = defaultData();
+    const writes = [];
+    seed.categories.forEach(c => writes.push(db.collection("categories").doc(c.id).set(c)));
+    seed.templates.forEach(t => writes.push(db.collection("templates").doc(t.id).set(t)));
+    return Promise.all(writes);
+  }
+
+  function initDb(){
+    // Whether THIS FRESH ARTIFACT'S DATABASE is empty must come from the
+    // snapshot itself (snap.empty) — never from state.categories/templates,
+    // which already hold the local placeholder defaults from page load and
+    // would make an empty database look "non-empty" forever, silently
+    // skipping the one-time seed every new team ever needs.
+    let catSnapDone = false, tplSnapDone = false, seedAttempted = false;
+    let categoriesEmptyInDb = false, templatesEmptyInDb = false;
+
+    function maybeSeed(){
+      if(seedAttempted || !catSnapDone || !tplSnapDone) return;
+      if(categoriesEmptyInDb && templatesEmptyInDb){
+        seedAttempted = true;
+        seedDb().catch(function(e){ console.warn("seed failed", e); });
+      }
+    }
+
+    db.collection("categories").onSnapshot(function(snap){
+      categoriesEmptyInDb = snap.empty;
+      if(!snap.empty){
+        state.categories = snap.docs.map(d => Object.assign({id:d.id}, d.data()));
+      }
+      catSnapDone = true;
+      maybeSeed();
+      render();
+    }, function(err){ console.warn("categories sync error", err); });
+
+    db.collection("templates").onSnapshot(function(snap){
+      templatesEmptyInDb = snap.empty;
+      state.templates = snap.docs.map(d => Object.assign({id:d.id}, d.data()));
+      tplSnapDone = true;
+      saveLocalCache();
+      maybeSeed();
+      render();
+    }, function(err){ console.warn("templates sync error", err); });
+
+    db.collection("images").onSnapshot(function(snap){
+      const map = {};
+      snap.docs.forEach(function(d){ map[d.id] = (d.data()||{}).dataUrl; });
+      state.images = map;
+      saveLocalCache();
+      render();
+    }, function(err){ console.warn("images sync error", err); });
+  }
+
+  if(typeof claude !== "undefined" && claude && claude.use){
+    claude.use("db").then(function(d){
+      if(d){
+        db = d; useDb = true;
+        initDb();
+        renderHeader();
+      }
+    }).catch(function(){ /* stay in local mode */ });
+  }
+
+  /* ============================= MUTATIONS ============================= */
+  function upsertTemplateLocal(tpl){
+    const i = state.templates.findIndex(t => t.id === tpl.id);
+    if(i >= 0) state.templates[i] = tpl; else state.templates.push(tpl);
+    saveLocalCache();
+  }
+  function removeTemplateLocal(id){
+    state.templates = state.templates.filter(t => t.id !== id);
+    saveLocalCache();
+  }
+
+  function saveTemplate(tpl){
+    if(useDb && db){
+      return db.collection("templates").doc(tpl.id).set(tpl).catch(function(e){
+        console.warn("save failed", e);
+        showToast("Save failed — " + (e && e.code === "invalid_argument" ? "this template has too much content, try shortening a message" : "please try again"), true);
+        throw e;
+      });
+    } else {
+      upsertTemplateLocal(tpl);
+      render();
+      return Promise.resolve();
+    }
+  }
+  function deleteTemplateById(id){
+    if(useDb && db){
+      return db.collection("templates").doc(id).delete().catch(function(e){
+        console.warn("delete failed", e);
+        showToast("Delete failed — please try again", true);
+        throw e;
+      });
+    } else {
+      removeTemplateLocal(id);
+      render();
+      return Promise.resolve();
+    }
+  }
+  function bulkSaveTemplates(list){
+    if(useDb && db){
+      return Promise.all(list.map(t => db.collection("templates").doc(t.id).set(t))).catch(function(e){
+        console.warn("bulk save failed", e);
+        showToast("Save failed — please try again", true);
+        throw e;
+      });
+    } else {
+      list.forEach(upsertTemplateLocal);
+      render();
+      return Promise.resolve();
+    }
+  }
+
+  /* ============================= HELPERS ============================= */
+  function uid(prefix){
+    return (prefix||"tpl") + "_" + Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+  }
+  function esc(s){
+    return String(s==null?"":s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function dayOrderOf(label){
+    const m = String(label||"").match(/\d+(\.\d+)?/);
+    return m ? parseFloat(m[0]) : 999;
+  }
+  function categoryById(id){ return state.categories.find(c => c.id === id); }
+  function templatesOf(catId){ return state.templates.filter(t => t.categoryId === catId); }
+  function distinctDays(catId){
+    const set = new Set(templatesOf(catId).map(t => t.day || (unitLabelOf(catId) + " 1")));
+    return Array.from(set).sort((a,b)=> dayOrderOf(a)-dayOrderOf(b) || a.localeCompare(b));
+  }
+  function toneVars(tone){
+    return { ink: "var(--cat-"+tone+"-ink)", bg: "var(--cat-"+tone+"-bg)" };
+  }
+  /* Reads a template's messages as an array, migrating older documents
+     that still have a single "customerMessage" string field. */
+  function getMessages(t){
+    if(t && Array.isArray(t.messages) && t.messages.length) return t.messages;
+    if(t && typeof t.customerMessage === "string" && t.customerMessage) return [t.customerMessage];
+    return [""];
+  }
+  /* Images live in their own "images" collection (each doc well under the
+     256 KiB per-document cap) so a template with several photos never
+     risks the template document itself becoming too large to save.
+     Resolves a template's ordered image list, migrating older documents
+     that still embedded {id, dataUrl} objects directly on the template. */
+  function getImageObjs(t){
+    let ids = (t && Array.isArray(t.imageIds)) ? t.imageIds : null;
+    if(!ids){
+      ids = ((t && t.images) || []).map(function(img){
+        if(img && img.id){
+          if(img.dataUrl && !state.images[img.id]) state.images[img.id] = img.dataUrl;
+          return img.id;
+        }
+        return null;
+      }).filter(Boolean);
+    }
+    return ids.map(function(id){ return { id: id, dataUrl: state.images[id] }; }).filter(function(o){ return !!o.dataUrl; });
+  }
+  function persistImage(id, dataUrl){
+    if(useDb && db){
+      return db.collection("images").doc(id).set({ dataUrl: dataUrl }).catch(function(e){
+        console.warn("image save failed", e);
+        showToast("Couldn't save that image — please try again", true);
+      });
+    }
+    saveLocalCache();
+    return Promise.resolve();
+  }
+  function persistImageDelete(id){
+    if(useDb && db){
+      return db.collection("images").doc(id).delete().catch(function(e){ console.warn("image delete failed", e); });
+    }
+    saveLocalCache();
+    return Promise.resolve();
+  }
+  function sendStepLabel(type, occurrenceIndex){
+    if(type === "image"){
+      return occurrenceIndex === 0 ? "Image" : (occurrenceIndex===1?"Second Image":(occurrenceIndex===2?"Third Image":("Image "+(occurrenceIndex+1))));
+    }
+    return occurrenceIndex === 0 ? "Message" : (occurrenceIndex===1?"Second Message":(occurrenceIndex===2?"Third Message":("Message "+(occurrenceIndex+1))));
+  }
+  function labeledSendOrder(arr){
+    const counts = {image:0, message:0};
+    return (arr||[]).map(type => {
+      const idx = counts[type] || 0;
+      counts[type] = idx + 1;
+      return { type: type, label: sendStepLabel(type, idx) };
+    });
+  }
+
+  function showToast(msg, isError){
+    let el = document.getElementById("toastEl");
+    if(!el){
+      el = document.createElement("div");
+      el.id = "toastEl";
+      el.className = "toast";
+      document.body.appendChild(el);
+    }
+    el.className = "toast" + (isError ? " toast-error" : "");
+    el.innerHTML = (isError ? ICONS.x : ICONS.check) + "<span></span>";
+    el.querySelector("span").textContent = msg;
+    el.style.display = "flex";
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.style.display = "none"; }, isError ? 4200 : 1800);
+  }
+
+  function copyToClipboard(text, btn){
+    function done(){
+      const original = btn.innerHTML;
+      btn.classList.add("copied");
+      btn.innerHTML = ICONS.check + "<span>Copied!</span>";
+      setTimeout(function(){
+        btn.classList.remove("copied");
+        btn.innerHTML = original;
+      }, 1700);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(text); done(); });
+    } else {
+      fallbackCopy(text); done();
+    }
+  }
+  function fallbackCopy(text){
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); }catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  /* ============================= SEARCH ============================= */
+  function searchTemplates(q){
+    if(!q || !q.trim()) return [];
+    const needle = q.trim().toLowerCase();
+    return state.templates.filter(t => {
+      const cat = categoryById(t.categoryId);
+      const hay = [t.purpose, getMessages(t).join(" "), t.internalNote, t.day, cat?cat.name:""].join(" ").toLowerCase();
+      return hay.indexOf(needle) !== -1;
+    }).slice(0, 30);
+  }
+  function highlight(text, q){
+    if(!q) return esc(text);
+    const idx = text.toLowerCase().indexOf(q.toLowerCase());
+    if(idx === -1) return esc(text.slice(0,140));
+    const start = Math.max(0, idx - 40);
+    const end = Math.min(text.length, idx + q.length + 60);
+    let snippet = (start>0?"…":"") + text.slice(start,end) + (end<text.length?"…":"");
+    const re = new RegExp("("+q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","ig");
+    return esc(snippet).replace(new RegExp("("+esc(q).replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+")","ig"), "<mark>$1</mark>");
+  }
+
+  /* ============================= RENDER: HEADER ============================= */
+  function renderHeader(){
+    const headerEl = document.getElementById("appHeader");
+    if(!headerEl) return;
+    headerEl.innerHTML =
+      '<button class="brand" data-action="go-home">' +
+        '<span class="brand-mark">C</span>' +
+        '<span class="brand-name">CSC Follow Up Hub</span>' +
+      '</button>' +
+      '<div class="search-wrap">' +
+        ICONS.search +
+        '<input class="search-input" id="globalSearch" type="text" placeholder="Search templates — e.g. pigmentation, RM399, promo" value="'+esc(searchQuery)+'" autocomplete="off">' +
+        '<div id="searchResultsSlot"></div>' +
+      '</div>' +
+      '<div class="header-right">' +
+        '<div class="sync-badge"><span class="sync-dot '+(useDb?'':'local')+'"></span>'+(useDb ? 'Synced to team' : 'Local only')+'</div>' +
+        '<div class="mode-toggle">' +
+          '<button data-action="set-mode" data-mode="csc" class="'+(mode==='csc'?'active':'')+'">'+ICONS.userIcon+'<span>CSC Mode</span></button>' +
+          '<button data-action="set-mode" data-mode="admin" class="'+(mode==='admin'?'active admin-active':'')+'">'+ICONS.shield+'<span>Admin Mode</span></button>' +
+        '</div>' +
+      '</div>';
+
+    const input = document.getElementById("globalSearch");
+    updateSearchResultsUI();
+    input.addEventListener("input", function(e){
+      searchQuery = e.target.value;
+      searchOpen = searchQuery.trim().length > 0;
+      updateSearchResultsUI();
+    });
+    input.addEventListener("focus", function(){
+      if(searchQuery.trim().length > 0){ searchOpen = true; updateSearchResultsUI(); }
+    });
+    input.addEventListener("keydown", function(e){
+      if(e.key === "Escape"){ searchOpen = false; input.blur(); updateSearchResultsUI(); }
+    });
+    input.addEventListener("blur", function(){
+      setTimeout(function(){ searchOpen = false; updateSearchResultsUI(); }, 160);
+    });
+  }
+
+  /* Updates only the dropdown panel under the search box, never the
+     <input> node itself — keeps keystrokes and cursor position intact. */
+  function updateSearchResultsUI(){
+    const slot = document.getElementById("searchResultsSlot");
+    if(!slot) return;
+    slot.innerHTML = searchOpen ? renderSearchResultsHtml() : "";
+  }
+
+  function renderSearchResultsHtml(){
+    const results = searchTemplates(searchQuery);
+    if(results.length === 0){
+      return '<div class="search-results"><div class="sr-empty">No templates match "'+esc(searchQuery)+'" yet.</div></div>';
+    }
+    return '<div class="search-results">' + results.map(function(t){
+      const cat = categoryById(t.categoryId);
+      const tone = toneVars(cat ? cat.tone : 1);
+      const msgJoined = getMessages(t).join("  ");
+      const snippetSrc = (msgJoined.toLowerCase().indexOf(searchQuery.toLowerCase())!==-1) ? msgJoined
+        : (t.purpose && t.purpose.toLowerCase().indexOf(searchQuery.toLowerCase())!==-1) ? t.purpose
+        : (t.internalNote || msgJoined || "");
+      return '<button class="sr-item" data-action="jump-to-template" data-cat="'+esc(t.categoryId)+'" data-day="'+esc(t.day)+'" data-tid="'+esc(t.id)+'">' +
+        '<div class="sr-item-top">' +
+          '<span class="cat-tag" style="background:'+tone.bg+';color:'+tone.ink+'">'+esc(cat?cat.name:"")+'</span>' +
+          '<span class="eyebrow">'+esc(t.day)+'</span>' +
+        '</div>' +
+        '<div class="sr-snippet">'+highlight(snippetSrc || "", searchQuery)+'</div>' +
+      '</button>';
+    }).join("") + '</div>';
+  }
+
+  /* ============================= RENDER: HOME ============================= */
+  function renderHome(){
+    return '<div class="home-wrap">' +
+      '<div class="home-hero">' +
+        '<div class="eyebrow">CSC Follow Up Hub</div>' +
+        '<h1>Everything you need to follow up,<br>in one place.</h1>' +
+        '<p>Choose a category, pick the day, and know exactly what to send — every time.</p>' +
+      '</div>' +
+      '<div class="category-grid">' +
+        state.categories.map(function(c){
+          const tone = toneVars(c.tone);
+          const count = templatesOf(c.id).length;
+          const days = distinctDays(c.id).length;
+          return '<button class="category-card" data-action="open-category" data-cat="'+esc(c.id)+'">' +
+            '<span class="cat-tag" style="background:'+tone.bg+';color:'+tone.ink+'">'+esc(c.name)+'</span>' +
+            '<div><h2>'+esc(c.name)+'</h2><div class="cat-sub">'+esc(c.subtitle)+'</div></div>' +
+            '<div class="cat-meta"><span><strong>'+days+'</strong> '+unitLabelOf(c.id).toLowerCase()+(days===1?'':'s')+'</span><span><strong>'+count+'</strong> template'+(count===1?'':'s')+'</span></div>' +
+          '</button>';
+        }).join("") +
+      '</div>' +
+    '</div>';
+  }
+
+  /* ============================= RENDER: CATEGORY ============================= */
+  function renderSidebar(){
+    return '<div class="sidebar">' +
+      '<button class="sidebar-link" data-action="go-home">'+ICONS.home+'<span>Home</span></button>' +
+      '<div class="sidebar-divider"></div>' +
+      '<div class="sidebar-heading">Categories</div>' +
+      state.categories.map(function(c){
+        const tone = toneVars(c.tone);
+        const active = c.id === currentCategoryId;
+        return '<button class="sidebar-link '+(active?'active':'')+'" data-action="open-category" data-cat="'+esc(c.id)+'">' +
+          '<span class="sidebar-dot" style="background:'+tone.ink+'"></span><span>'+esc(c.name)+'</span></button>';
+      }).join("") +
+    '</div>';
+  }
+
+  function renderDayRail(catId){
+    const days = distinctDays(catId);
+    const all = templatesOf(catId);
+    const unit = unitLabelOf(catId);
+    const unitPlural = unitLabelPluralOf(catId);
+    let html = '<div class="day-rail mobile-day-scroll">';
+    html += '<button class="day-pill '+(currentDay==='__all__'?'active':'')+'" data-action="set-day" data-day="__all__">All '+esc(unitPlural)+' <span class="count">'+all.length+'</span></button>';
+    days.forEach(function(d){
+      const n = all.filter(t=>t.day===d).length;
+      const active = currentDay === d;
+      html += '<button class="day-pill '+(active?'active':'')+'" data-action="set-day" data-day="'+esc(d)+'">' +
+        '<span>'+esc(d)+'</span><span class="count">'+n+'</span>' +
+        (mode==='admin' ? '<span class="pill-admin-btn" data-action="rename-day" data-day="'+esc(d)+'" title="Rename '+esc(unit.toLowerCase())+'">'+ICONS.pencil+'</span>' : '') +
+        (mode==='admin' ? '<span class="pill-admin-btn" data-action="delete-day" data-day="'+esc(d)+'" title="Delete '+esc(unit.toLowerCase())+'">'+ICONS.trash+'</span>' : '') +
+      '</button>';
+    });
+    if(mode==='admin'){
+      html += '<button class="day-add-btn" data-action="add-day">'+ICONS.plus+'<span>Add '+esc(unit)+'</span></button>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function renderPurposeChips(catId){
+    const scope = currentDay === "__all__" ? templatesOf(catId) : templatesOf(catId).filter(t=>t.day===currentDay);
+    const purposes = Array.from(new Set(scope.map(t=>t.purpose).filter(Boolean)));
+    if(purposes.length <= 1) return "";
+    let html = '<div class="chip-row">';
+    html += '<button class="chip '+(!purposeFilter?'active':'')+'" data-action="set-purpose" data-purpose="">All types</button>';
+    purposes.forEach(function(p){
+      html += '<button class="chip '+(purposeFilter===p?'active':'')+'" data-action="set-purpose" data-purpose="'+esc(p)+'">'+esc(p)+'</button>';
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function templateCardHtml(t, catTone){
+    const steps = labeledSendOrder(t.sendOrder);
+    const hasNote = t.internalNote && t.internalNote.trim().length > 0;
+    const messages = getMessages(t);
+    return '<div class="template-card" id="tpl-'+esc(t.id)+'" data-tid="'+esc(t.id)+'">' +
+      '<div class="tc-top">' +
+        '<div class="tc-top-left">' +
+          '<span class="purpose-tag">'+esc(t.purpose || "General Follow-up")+'</span>' +
+        '</div>' +
+        (mode==='admin' ? (
+          '<div class="tc-admin-actions">' +
+            '<button class="icon-btn" data-action="move-template" data-tid="'+esc(t.id)+'" data-dir="up" title="Move up">'+ICONS.up+'</button>' +
+            '<button class="icon-btn" data-action="move-template" data-tid="'+esc(t.id)+'" data-dir="down" title="Move down">'+ICONS.down+'</button>' +
+            '<button class="icon-btn" data-action="edit-template" data-tid="'+esc(t.id)+'" title="Edit">'+ICONS.pencil+'</button>' +
+            '<button class="icon-btn danger" data-action="delete-template" data-tid="'+esc(t.id)+'" title="Delete">'+ICONS.trash+'</button>' +
+          '</div>'
+        ) : '') +
+      '</div>' +
+      (hasNote ? (
+        '<div class="internal-note">' + ICONS.eyeoff +
+          '<div><b>Internal Note — CSC Only</b>'+esc(t.internalNote)+'</div>' +
+        '</div>'
+      ) : '') +
+      messages.map(function(msg, mi){
+        const label = messages.length > 1 ? "Message " + (mi+1) : "Customer Message";
+        const isPlaceholder = /^\[.*\]$/.test((msg||"").trim());
+        return '<div class="message-block">' +
+          '<div class="message-block-label"><span class="eyebrow">'+esc(label)+'</span>' +
+            '<button class="copy-btn" data-action="copy-message" data-tid="'+esc(t.id)+'" data-midx="'+mi+'">'+ICONS.copy+'<span>Copy</span></button>' +
+          '</div>' +
+          '<div class="message-box '+(isPlaceholder?'placeholder':'')+'">'+esc(msg || "")+'</div>' +
+        '</div>';
+      }).join("") +
+      (function(){
+        const imgs = getImageObjs(t);
+        if(imgs.length===0 && mode!=='admin') return '<div class="no-media-note">No image attached.</div>';
+        return '<div class="media-row">' +
+          imgs.map(function(img, idx){
+            return '<div class="img-thumb" data-action="open-lightbox" data-tid="'+esc(t.id)+'" data-idx="'+idx+'">' +
+              '<img src="'+img.dataUrl+'" alt="Template image">' +
+              (mode==='admin' ? '<button class="rm-btn" data-action="remove-image" data-tid="'+esc(t.id)+'" data-imgid="'+esc(img.id)+'" title="Remove image">'+ICONS.x+'</button>' : '') +
+            '</div>';
+          }).join("") +
+          (mode==='admin' ? '<button class="img-add-tile" data-action="add-image" data-tid="'+esc(t.id)+'" title="Add image">'+ICONS.plus+'</button>' : '') +
+        '</div>';
+      })() +
+      '<div class="send-order"><span class="eyebrow">Send Order</span>' +
+        steps.map(function(s, i){
+          return (i>0?'<span class="send-arrow">'+ICONS.arrowShort+'</span>':'') +
+            '<span class="send-step"><span class="step-n">'+(i+1)+'</span>'+(s.type==='image'?ICONS.image:ICONS.message)+'<span>'+esc(s.label)+'</span></span>';
+        }).join("") +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderCategoryMain(catId){
+    const cat = categoryById(catId);
+    if(!cat) return '<div class="cat-main"><p>Category not found.</p></div>';
+    const tone = toneVars(cat.tone);
+    let list = templatesOf(catId);
+    if(currentDay !== "__all__") list = list.filter(t => t.day === currentDay);
+    if(purposeFilter) list = list.filter(t => t.purpose === purposeFilter);
+
+    let bodyHtml;
+    const unit = unitLabelOf(catId);
+    if(templatesOf(catId).length === 0){
+      bodyHtml = '<div class="empty-state">' + ICONS.inbox +
+        '<h3>No '+esc(unit.toLowerCase())+'s yet</h3><p>Add the first '+esc(unit)+' and template for this category.</p>' +
+        (mode==='admin' ? '<button class="btn btn-primary" data-action="add-day">'+ICONS.plus+' Add '+esc(unit)+'</button>' : '<p style="color:var(--ink-3)">Switch to Admin Mode to add content.</p>') +
+      '</div>';
+    } else if(currentDay === "__all__"){
+      const days = distinctDays(catId);
+      bodyHtml = days.map(function(d){
+        let items = templatesOf(catId).filter(t=>t.day===d);
+        if(purposeFilter) items = items.filter(t=>t.purpose===purposeFilter);
+        items.sort((a,b)=>(a.order||0)-(b.order||0));
+        if(items.length === 0) return "";
+        return '<div class="day-group-heading"><h3>'+esc(d)+'</h3><div class="line"></div></div>' +
+          '<div class="template-list">' + items.map(t=>templateCardHtml(t, tone)).join("") +
+          (mode==='admin' ? '<button class="btn btn-sm admin-add-row" data-action="add-template" data-day="'+esc(d)+'">'+ICONS.plus+' Add Template to '+esc(d)+'</button>' : '') +
+          '</div>';
+      }).join("");
+    } else {
+      list.sort((a,b)=>(a.order||0)-(b.order||0));
+      if(list.length === 0){
+        bodyHtml = '<div class="empty-state">' + ICONS.inbox +
+          '<h3>Nothing here yet</h3><p>No templates match this filter for '+esc(currentDay)+'.</p>' +
+          (mode==='admin' ? '<button class="btn btn-primary" data-action="add-template" data-day="'+esc(currentDay)+'">'+ICONS.plus+' Add Template</button>' : '') +
+        '</div>';
+      } else {
+        bodyHtml = '<div class="template-list">' + list.map(t=>templateCardHtml(t, tone)).join("") +
+          (mode==='admin' ? '<button class="btn btn-sm admin-add-row" data-action="add-template" data-day="'+esc(currentDay)+'">'+ICONS.plus+' Add Template to '+esc(currentDay)+'</button>' : '') +
+          '</div>';
+      }
+    }
+
+    return '<div class="cat-main">' +
+      '<div class="cat-header">' +
+        '<div class="breadcrumb"><button data-action="go-home">Home</button> / '+esc(cat.name)+'</div>' +
+        '<div class="cat-header-top">' +
+          '<div><h1>'+esc(cat.name)+'</h1><div class="cat-sub">'+esc(cat.subtitle)+'</div></div>' +
+        '</div>' +
+        renderDayRail(catId) +
+        renderPurposeChips(catId) +
+      '</div>' +
+      bodyHtml +
+    '</div>';
+  }
+
+  /* ============================= MODALS ============================= */
+  function openTemplateModal(opts){
+    // opts: {mode:'add', categoryId, day} or {mode:'edit', template}
+    const isEdit = opts.mode === "edit";
+    const t = isEdit ? Object.assign({}, opts.template, {
+        imageIds: getImageObjs(opts.template).map(o=>o.id),
+        sendOrder:(opts.template.sendOrder||[]).slice(),
+        messages: getMessages(opts.template).slice()
+      })
+      : { id: uid("tpl"), categoryId: opts.categoryId, day: opts.day || "", purpose:"", internalNote:"", messages:[""], imageIds:[], sendOrder:["message"], order: (Math.max(0,...templatesOf(opts.categoryId).filter(x=>x.day===opts.day).map(x=>x.order||0))+1) };
+    delete t.images;
+    delete t.customerMessage;
+    modal = { type:"template", draft: t, isEdit: isEdit };
+    render();
+  }
+
+  /* Reads the current form fields into modal.draft so structural actions
+     (add/remove a message, an image, or a send-order step) never wipe out
+     text the admin already typed before the modal is re-rendered. */
+  function syncModalDraftFromDOM(){
+    if(!modal || modal.type !== "template") return;
+    const dayEl = document.getElementById("f_day");
+    const purposeEl = document.getElementById("f_purpose");
+    const noteEl = document.getElementById("f_note");
+    if(dayEl) modal.draft.day = dayEl.value;
+    if(purposeEl) modal.draft.purpose = purposeEl.value;
+    if(noteEl) modal.draft.internalNote = noteEl.value;
+    const msgEls = document.querySelectorAll(".msg-textarea");
+    if(msgEls.length) modal.draft.messages = Array.from(msgEls).map(el => el.value);
+  }
+
+  function templateModalHtml(){
+    const t = modal.draft;
+    const steps = t.sendOrder || [];
+    const unit = unitLabelOf(t.categoryId);
+    return '<div class="overlay" data-action="close-modal-bg">' +
+      '<div class="modal" data-stop="1">' +
+        '<div class="modal-head"><h2>'+(modal.isEdit?'Edit Template':'Add Template')+'</h2>' +
+          '<button class="icon-btn" data-action="close-modal">'+ICONS.x+'</button></div>' +
+        '<div class="modal-sub">UI is English-only. Keep the Customer Message exactly as your source content — this dashboard will not translate or rewrite it.</div>' +
+        '<div class="field-row">' +
+          '<div class="field"><label>'+esc(unit)+'</label><input type="text" id="f_day" placeholder="e.g. '+esc(unit)+' 1" value="'+esc(t.day)+'"></div>' +
+          '<div class="field"><label>Purpose <span class="hint">(shown as tag)</span></label><input type="text" id="f_purpose" placeholder="e.g. Treatment Education" value="'+esc(t.purpose)+'"></div>' +
+        '</div>' +
+        '<div class="field"><label>Internal Note <span class="hint">(CSC only — never copied to customer)</span></label>' +
+          '<textarea id="f_note" placeholder="e.g. Only send this if customer did not reply to the previous message.">'+esc(t.internalNote)+'</textarea></div>' +
+        '<div class="field"><label>Customer Messages <span class="hint">(each one its own message — exact content to copy, line breaks & emoji preserved)</span></label>' +
+          '<div class="msg-editor" id="f_messages">' +
+            (t.messages||[""]).map(function(msg, mi){
+              const msgs = t.messages||[""];
+              return '<div class="msg-editor-row">' +
+                '<span class="step-n mono" style="padding-top:9px">'+(mi+1)+'</span>' +
+                '<textarea class="msg-textarea" placeholder="[Follow up template will be added here]">'+esc(msg)+'</textarea>' +
+                '<div class="se-btns">' +
+                  (mi>0?'<button data-action="message-move" data-idx="'+mi+'" data-dir="up" title="Move up">'+ICONS.up+'</button>':'') +
+                  (mi<msgs.length-1?'<button data-action="message-move" data-idx="'+mi+'" data-dir="down" title="Move down">'+ICONS.down+'</button>':'') +
+                  (msgs.length>1?'<button data-action="message-remove" data-idx="'+mi+'" title="Remove">'+ICONS.x+'</button>':'') +
+                '</div>' +
+              '</div>';
+            }).join("") +
+          '</div>' +
+          '<div class="add-step-row"><button class="btn btn-sm" data-action="message-add">'+ICONS.plus+' Add Message</button></div>' +
+        '</div>' +
+        '<div class="field"><label>Images</label>' +
+          '<input type="file" id="f_img" accept="image/*" multiple>' +
+          '<div class="modal-img-row" id="f_img_row">' +
+            (t.imageIds||[]).map(function(id){
+              const dataUrl = state.images[id];
+              if(!dataUrl) return '';
+              return '<div class="img-thumb" data-imgid="'+esc(id)+'"><img src="'+dataUrl+'"><button class="rm-btn" data-action="modal-remove-image" data-imgid="'+esc(id)+'">'+ICONS.x+'</button></div>';
+            }).join("") +
+          '</div>' +
+        '</div>' +
+        '<div class="field"><label>Send Order</label>' +
+          '<div class="send-editor" id="f_sendorder">' +
+            labeledSendOrder(steps).map(function(s, i){
+              return '<div class="send-editor-row">' +
+                '<span class="step-n mono">'+(i+1)+'</span>' + (s.type==='image'?ICONS.image:ICONS.message) +
+                '<span class="se-label">'+esc(s.label)+'</span>' +
+                '<div class="se-btns">' +
+                  (i>0?'<button data-action="step-move" data-idx="'+i+'" data-dir="up" title="Move up">'+ICONS.up+'</button>':'') +
+                  (i<steps.length-1?'<button data-action="step-move" data-idx="'+i+'" data-dir="down" title="Move down">'+ICONS.down+'</button>':'') +
+                  '<button data-action="step-remove" data-idx="'+i+'" title="Remove">'+ICONS.x+'</button>' +
+                '</div>' +
+              '</div>';
+            }).join("") +
+          '</div>' +
+          '<div class="add-step-row">' +
+            '<button class="btn btn-sm" data-action="step-add" data-type="message">'+ICONS.plus+' Add Message Step</button>' +
+            '<button class="btn btn-sm" data-action="step-add" data-type="image">'+ICONS.plus+' Add Image Step</button>' +
+          '</div>' +
+        '</div>' +
+        '<div class="modal-actions">' +
+          '<button class="btn" data-action="close-modal">Cancel</button>' +
+          '<button class="btn btn-primary" data-action="save-template">'+ICONS.check+' Save Template</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function confirmModalHtml(){
+    const c = modal;
+    return '<div class="overlay" data-action="close-modal-bg">' +
+      '<div class="modal confirm-modal" data-stop="1">' +
+        '<div class="modal-head"><h2>'+esc(c.title)+'</h2>' +
+          '<button class="icon-btn" data-action="close-modal">'+ICONS.x+'</button></div>' +
+        '<p>'+esc(c.message)+'</p>' +
+        '<div class="modal-actions">' +
+          '<button class="btn" data-action="close-modal">Cancel</button>' +
+          '<button class="btn btn-danger" data-action="confirm-yes">'+esc(c.confirmLabel||'Delete')+'</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function adminPasswordModalHtml(){
+    return '<div class="overlay" data-action="close-admin-password">' +
+      '<div class="modal confirm-modal" data-stop="1">' +
+        '<div class="modal-head"><h2>Admin Mode</h2>' +
+          '<button class="icon-btn" data-action="close-admin-password">'+ICONS.x+'</button></div>' +
+        '<p style="margin-top:2px;">Enter the Admin password to continue.</p>' +
+        '<div class="field"><label>Password</label><input type="password" id="adminPasswordInput" autocomplete="off" placeholder="••••••••"></div>' +
+        (modal.error ? '<p style="color:var(--danger);font-size:12.5px;margin:-8px 0 12px;">Wrong password — try again.</p>' : '') +
+        '<div class="modal-actions">' +
+          '<button class="btn" data-action="close-admin-password">Cancel</button>' +
+          '<button class="btn btn-primary" data-action="submit-admin-password">'+ICONS.check+' Unlock</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function renameDayModalHtml(){
+    return '<div class="overlay" data-action="close-modal-bg">' +
+      '<div class="modal confirm-modal" data-stop="1">' +
+        '<div class="modal-head"><h2>Rename '+esc(modal.oldDay)+'</h2>' +
+          '<button class="icon-btn" data-action="close-modal">'+ICONS.x+'</button></div>' +
+        '<div class="field"><label>New '+esc(unitLabelOf(currentCategoryId).toLowerCase())+' label</label><input type="text" id="renameDayInput" value="'+esc(modal.oldDay)+'"></div>' +
+        '<div class="modal-actions">' +
+          '<button class="btn" data-action="close-modal">Cancel</button>' +
+          '<button class="btn btn-primary" data-action="save-rename-day">'+ICONS.check+' Rename</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function openConfirm(title, message, onYes, confirmLabel){
+    modal = { type:"confirm", title:title, message:message, onYes:onYes, confirmLabel:confirmLabel };
+    render();
+  }
+
+  function lightboxHtml(){
+    const imgs = lightbox.images;
+    const cur = imgs[lightbox.index];
+    return '<div class="lightbox-overlay" data-action="close-lightbox">' +
+      '<button class="lightbox-close" data-action="close-lightbox">'+ICONS.x+'</button>' +
+      (imgs.length>1?'<button class="lightbox-nav prev" data-action="lightbox-nav" data-dir="-1">'+ICONS.chevronL+'</button>':'') +
+      '<img src="'+cur.dataUrl+'" data-stop="1">' +
+      (imgs.length>1?'<button class="lightbox-nav next" data-action="lightbox-nav" data-dir="1">'+ICONS.chevronR+'</button>':'') +
+    '</div>';
+  }
+
+  /* ============================= IMAGE COMPRESSION ============================= */
+  // Each image is stored as its own database document (256 KiB cap), so
+  // step quality/width down until the encoded image comfortably clears
+  // that ceiling, leaving headroom for the JSON wrapper around it.
+  function readAndCompressImage(file){
+    const TARGET_BYTES = 170000;
+    return new Promise(function(resolve, reject){
+      const reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = function(){
+        const im = new Image();
+        im.onerror = reject;
+        im.onload = function(){
+          function render(width, quality){
+            const scale = Math.min(1, width / im.width);
+            const w = Math.max(1, Math.round(im.width * scale)), h = Math.max(1, Math.round(im.height * scale));
+            const canvas = document.createElement("canvas");
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(im, 0, 0, w, h);
+            return canvas.toDataURL("image/jpeg", quality);
+          }
+          let width = 960, quality = 0.78;
+          let dataUrl = render(width, quality);
+          let guard = 0;
+          while(dataUrl.length > TARGET_BYTES && guard < 8){
+            if(quality > 0.42){ quality -= 0.12; } else { width = Math.round(width * 0.8); }
+            dataUrl = render(width, quality);
+            guard++;
+          }
+          resolve({ id: uid("img"), dataUrl: dataUrl });
+        };
+        im.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* ============================= MAIN RENDER ============================= */
+  let mode = "csc";
+
+  /* Soft protection only — this is a static page with no backend, so a
+     determined technical person could bypass this via devtools. It exists
+     to stop teammates from casually clicking into Admin Mode, not to be
+     hacker-proof. Unlock is remembered for this browser tab only. */
+  const ADMIN_PASSWORD = "agh030222";
+  let adminUnlocked = false;
+  try{ adminUnlocked = sessionStorage.getItem("csc_admin_unlocked") === "1"; }catch(e){}
+
+  function render(){
+    const appEl = document.getElementById("app");
+    let viewHtml = "";
+    if(view === "home"){
+      viewHtml = renderHome();
+    } else if(view === "category"){
+      viewHtml = '<div class="cat-shell">' + renderSidebar() + renderCategoryMain(currentCategoryId) + '</div>';
+    }
+
+    appEl.innerHTML =
+      '<header class="app-header" id="appHeader"></header>' +
+      (mode==='admin' ? '<div class="admin-banner">'+ICONS.shield+'<span>Admin Mode — changes '+(useDb?'sync to the whole team':'are saved to this browser only')+'. Switch back to CSC Mode when you\'re done editing.</span></div>' : '') +
+      '<div class="view">' + viewHtml + '</div>' +
+      (modal ? (modal.type==='template' ? templateModalHtml() : modal.type==='rename-day' ? renameDayModalHtml() : modal.type==='admin-password' ? adminPasswordModalHtml() : confirmModalHtml()) : '') +
+      (lightbox ? lightboxHtml() : '');
+
+    renderHeader();
+    bindModalInputs();
+  }
+
+  function bindModalInputs(){
+    if(modal && modal.type === "admin-password"){
+      const pwInput = document.getElementById("adminPasswordInput");
+      if(pwInput){
+        pwInput.focus();
+        pwInput.addEventListener("keydown", function(e){
+          if(e.key === "Enter"){
+            e.preventDefault();
+            document.querySelector('[data-action="submit-admin-password"]').click();
+          }
+        });
+      }
+      return;
+    }
+    if(!modal || modal.type !== "template") return;
+    const fImg = document.getElementById("f_img");
+    if(fImg){
+      fImg.addEventListener("change", function(e){
+        const files = Array.from(e.target.files || []);
+        // Capture whatever is currently typed in the form BEFORE the
+        // async compression resolves and re-renders the modal — otherwise
+        // any text typed since the last render is silently lost.
+        syncModalDraftFromDOM();
+        Promise.all(files.map(readAndCompressImage)).then(function(results){
+          results.forEach(function(r){ state.images[r.id] = r.dataUrl; persistImage(r.id, r.dataUrl); });
+          modal.draft.imageIds = (modal.draft.imageIds||[]).concat(results.map(r=>r.id));
+          render();
+        });
+      });
+    }
+  }
+
+  /* ============================= EVENTS ============================= */
+  document.addEventListener("click", function(e){
+    const stopEl = e.target.closest("[data-stop]");
+    const overlayBg = e.target.closest("[data-action='close-modal-bg'], [data-action='close-lightbox']");
+    if(overlayBg && !stopEl){
+      if(overlayBg.dataset.action === "close-modal-bg"){ modal = null; render(); return; }
+      if(overlayBg.dataset.action === "close-lightbox"){ lightbox = null; render(); return; }
+    }
+    const t = e.target.closest("[data-action]");
+    if(!t) {
+      // click outside search box closes results
+      if(!e.target.closest(".search-wrap") && searchOpen){ searchOpen = false; updateSearchResultsUI(); }
+      return;
+    }
+    const action = t.dataset.action;
+
+    // Keep in-progress form text before any action that re-renders the
+    // template modal (add/remove a message, image or send-order step).
+    if(modal && modal.type === "template" && action !== "save-template" && action !== "close-modal"){
+      syncModalDraftFromDOM();
+    }
+
+    switch(action){
+      case "go-home":
+        view = "home"; currentCategoryId = null; currentDay = null; purposeFilter = null;
+        searchOpen = false; render(); window.scrollTo(0,0);
+        break;
+
+      case "open-category": {
+        const catId = t.dataset.cat;
+        currentCategoryId = catId;
+        const days = distinctDays(catId);
+        currentDay = days.length ? days[0] : "__all__";
+        purposeFilter = null;
+        view = "category"; searchOpen = false;
+        render(); window.scrollTo(0,0);
+        break;
+      }
+
+      case "set-mode":
+        if(t.dataset.mode === "admin" && !adminUnlocked){
+          modal = { type:"admin-password", error:false };
+          render();
+          break;
+        }
+        mode = t.dataset.mode;
+        render();
+        break;
+
+      case "close-admin-password":
+        modal = null;
+        render();
+        break;
+
+      case "submit-admin-password": {
+        const input = document.getElementById("adminPasswordInput");
+        const val = input ? input.value : "";
+        if(val === ADMIN_PASSWORD){
+          adminUnlocked = true;
+          try{ sessionStorage.setItem("csc_admin_unlocked", "1"); }catch(e){}
+          modal = null;
+          mode = "admin";
+          render();
+        } else {
+          modal = { type:"admin-password", error:true };
+          render();
+        }
+        break;
+      }
+
+      case "set-day":
+        currentDay = t.dataset.day;
+        purposeFilter = null;
+        render();
+        break;
+
+      case "set-purpose":
+        purposeFilter = t.dataset.purpose || null;
+        render();
+        break;
+
+      case "jump-to-template": {
+        const catId = t.dataset.cat, day = t.dataset.day, tid = t.dataset.tid;
+        currentCategoryId = catId; currentDay = day; purposeFilter = null; view = "category";
+        searchOpen = false;
+        render();
+        setTimeout(function(){
+          const el = document.getElementById("tpl-"+tid);
+          if(el){ el.scrollIntoView({behavior:"smooth", block:"center"}); el.classList.add("flash"); setTimeout(()=>el.classList.remove("flash"), 1700); }
+        }, 60);
+        break;
+      }
+
+      case "copy-message": {
+        const tid = t.dataset.tid;
+        const midx = parseInt(t.dataset.midx || "0", 10);
+        const tpl = state.templates.find(x=>x.id===tid);
+        if(tpl) copyToClipboard(getMessages(tpl)[midx] || "", t);
+        break;
+      }
+
+      case "open-lightbox": {
+        const tid = t.dataset.tid, idx = parseInt(t.dataset.idx,10);
+        const tpl = state.templates.find(x=>x.id===tid);
+        const imgs = tpl ? getImageObjs(tpl) : [];
+        if(imgs.length){ lightbox = { images: imgs, index: idx }; render(); }
+        break;
+      }
+      case "close-lightbox":
+        lightbox = null; render();
+        break;
+      case "lightbox-nav": {
+        const dir = parseInt(t.dataset.dir,10);
+        lightbox.index = (lightbox.index + dir + lightbox.images.length) % lightbox.images.length;
+        render();
+        break;
+      }
+
+      /* ---- admin: template CRUD ---- */
+      case "add-template":
+        openTemplateModal({ mode:"add", categoryId: currentCategoryId, day: t.dataset.day || (currentDay==="__all__"?"":currentDay) });
+        break;
+      case "edit-template": {
+        const tpl = state.templates.find(x=>x.id===t.dataset.tid);
+        if(tpl) openTemplateModal({ mode:"edit", template: tpl });
+        break;
+      }
+      case "delete-template": {
+        const tid = t.dataset.tid;
+        const tpl = state.templates.find(x=>x.id===tid);
+        const imgIdsToClean = tpl ? getImageObjs(tpl).map(o=>o.id) : [];
+        openConfirm("Delete this template?", "This template and its images will be removed for everyone. This can't be undone.", function(){
+          deleteTemplateById(tid).catch(function(){});
+          imgIdsToClean.forEach(persistImageDelete);
+        }, "Delete Template");
+        break;
+      }
+      case "move-template": {
+        const tid = t.dataset.tid, dir = t.dataset.dir;
+        const tpl = state.templates.find(x=>x.id===tid);
+        if(!tpl) break;
+        const siblings = state.templates.filter(x=>x.categoryId===tpl.categoryId && x.day===tpl.day).sort((a,b)=>(a.order||0)-(b.order||0));
+        const i = siblings.findIndex(x=>x.id===tid);
+        const j = dir==="up" ? i-1 : i+1;
+        if(j<0 || j>=siblings.length) break;
+        const a = siblings[i], b = siblings[j];
+        const tmp = a.order; a.order = b.order; b.order = tmp;
+        bulkSaveTemplates([a,b]).catch(function(){});
+        break;
+      }
+
+      /* ---- admin: days ---- */
+      case "add-day":
+        openTemplateModal({ mode:"add", categoryId: currentCategoryId, day: "" });
+        break;
+      case "rename-day": {
+        modal = { type:"rename-day", oldDay: t.dataset.day, value: t.dataset.day };
+        render();
+        break;
+      }
+      case "save-rename-day": {
+        const input = document.getElementById("renameDayInput");
+        const val = input.value.trim();
+        const oldDay = modal.oldDay;
+        if(val && val !== oldDay){
+          const affected = state.templates.filter(x=>x.categoryId===currentCategoryId && x.day===oldDay);
+          const updated = affected.map(x=>Object.assign({}, x, {day:val}));
+          bulkSaveTemplates(updated).then(function(){
+            currentDay = val;
+            render();
+          }).catch(function(){});
+        }
+        modal = null;
+        render();
+        break;
+      }
+      case "delete-day": {
+        const day = t.dataset.day;
+        const count = templatesOf(currentCategoryId).filter(x=>x.day===day).length;
+        openConfirm("Delete "+day+"?", "This will delete "+count+" template"+(count===1?"":"s")+" under "+day+" for everyone. This can't be undone.", function(){
+          const toDelete = state.templates.filter(x=>x.categoryId===currentCategoryId && x.day===day);
+          toDelete.forEach(function(x){ getImageObjs(x).forEach(function(o){ persistImageDelete(o.id); }); });
+          Promise.all(toDelete.map(x=>deleteTemplateById(x.id).catch(function(){}))).then(function(){
+            const days = distinctDays(currentCategoryId);
+            currentDay = days.length ? days[0] : "__all__";
+            render();
+          });
+        }, "Delete " + unitLabelOf(currentCategoryId));
+        break;
+      }
+
+      /* ---- modal: general ---- */
+      case "close-modal":
+        modal = null; render();
+        break;
+      case "save-template": {
+        const draft = modal.draft;
+        draft.day = document.getElementById("f_day").value.trim() || (unitLabelOf(draft.categoryId) + " 1");
+        draft.purpose = document.getElementById("f_purpose").value.trim();
+        draft.internalNote = document.getElementById("f_note").value;
+        const msgEls = document.querySelectorAll(".msg-textarea");
+        draft.messages = Array.from(msgEls).map(el => el.value);
+        if(draft.messages.length === 0) draft.messages = [""];
+        delete draft.customerMessage;
+        delete draft.images;
+        saveTemplate(draft).then(function(){
+          modal = null;
+          currentDay = draft.day;
+          purposeFilter = null;
+          render();
+        }).catch(function(){ /* error already surfaced via toast; keep modal open */ });
+        break;
+      }
+      case "modal-remove-image": {
+        const imgid = t.dataset.imgid;
+        modal.draft.imageIds = (modal.draft.imageIds||[]).filter(id=>id!==imgid);
+        persistImageDelete(imgid);
+        render();
+        break;
+      }
+      case "remove-image": {
+        const tid = t.dataset.tid, imgid = t.dataset.imgid;
+        const tpl = state.templates.find(x=>x.id===tid);
+        if(tpl){
+          tpl.imageIds = getImageObjs(tpl).map(o=>o.id).filter(id=>id!==imgid);
+          delete tpl.images;
+          saveTemplate(tpl).catch(function(){});
+          persistImageDelete(imgid);
+        }
+        break;
+      }
+      case "add-image": {
+        const tid = t.dataset.tid;
+        const tpl = state.templates.find(x=>x.id===tid);
+        if(!tpl) break;
+        const input = document.createElement("input");
+        input.type = "file"; input.accept = "image/*"; input.multiple = true;
+        input.addEventListener("change", function(e){
+          const files = Array.from(e.target.files||[]);
+          Promise.all(files.map(readAndCompressImage)).then(function(results){
+            results.forEach(function(r){ state.images[r.id] = r.dataUrl; persistImage(r.id, r.dataUrl); });
+            tpl.imageIds = getImageObjs(tpl).map(o=>o.id).concat(results.map(r=>r.id));
+            delete tpl.images;
+            saveTemplate(tpl).catch(function(){});
+          });
+        });
+        input.click();
+        break;
+      }
+
+      /* ---- modal: send order editor ---- */
+      case "message-add": {
+        modal.draft.messages = (modal.draft.messages||[]).concat([""]);
+        render();
+        break;
+      }
+      case "message-remove": {
+        const idx = parseInt(t.dataset.idx,10);
+        modal.draft.messages.splice(idx,1);
+        if(modal.draft.messages.length===0) modal.draft.messages=[""];
+        render();
+        break;
+      }
+      case "message-move": {
+        const idx = parseInt(t.dataset.idx,10), dir = t.dataset.dir;
+        const arr = modal.draft.messages;
+        const j = dir==="up" ? idx-1 : idx+1;
+        if(j<0||j>=arr.length) break;
+        const tmp = arr[idx]; arr[idx]=arr[j]; arr[j]=tmp;
+        render();
+        break;
+      }
+
+      case "step-add": {
+        modal.draft.sendOrder = (modal.draft.sendOrder||[]).concat([t.dataset.type]);
+        render();
+        break;
+      }
+      case "step-remove": {
+        const idx = parseInt(t.dataset.idx,10);
+        modal.draft.sendOrder.splice(idx,1);
+        render();
+        break;
+      }
+      case "step-move": {
+        const idx = parseInt(t.dataset.idx,10), dir = t.dataset.dir;
+        const arr = modal.draft.sendOrder;
+        const j = dir==="up" ? idx-1 : idx+1;
+        if(j<0||j>=arr.length) break;
+        const tmp = arr[idx]; arr[idx]=arr[j]; arr[j]=tmp;
+        render();
+        break;
+      }
+
+      case "confirm-yes": {
+        const fn = modal.onYes;
+        modal = null;
+        if(fn) fn();
+        render();
+        break;
+      }
+    }
+  });
+
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape"){
+      if(lightbox){ lightbox = null; render(); }
+      else if(modal){ modal = null; render(); }
+    }
+    if(lightbox && lightbox.images.length>1){
+      if(e.key==="ArrowRight"){ lightbox.index=(lightbox.index+1)%lightbox.images.length; render(); }
+      if(e.key==="ArrowLeft"){ lightbox.index=(lightbox.index-1+lightbox.images.length)%lightbox.images.length; render(); }
+    }
+  });
+
+  /* ============================= INIT ============================= */
+  render();
+})();
+</script>
+
+</body>
+</html>
