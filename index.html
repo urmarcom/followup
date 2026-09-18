@@ -654,6 +654,21 @@
     console.warn("Firebase unavailable, staying in local-only mode", e);
   }
 
+  // One-time manual escape hatch: seedDb() only auto-runs the very first time
+  // Firestore is completely empty, so if an earlier export ever seeded it
+  // with older content, later exports with newer content can't overwrite it
+  // on their own. Running window.__forceReseedFromExport() in the browser
+  // console pushes THIS file's own baked-in content into Firestore,
+  // overwriting whatever is there now (safe to run more than once).
+  window.__forceReseedFromExport = function(){
+    if(!useDb || !db){ alert("Firebase isn't connected yet — wait a moment and try again."); return; }
+    seedDb().then(function(){
+      alert("Done! Firestore now has this file's content. Refresh the page.");
+    }).catch(function(e){
+      alert("Reseed failed: " + (e && e.message ? e.message : e));
+    });
+  };
+
   /* ============================= MUTATIONS ============================= */
   function upsertTemplateLocal(tpl){
     const i = state.templates.findIndex(t => t.id === tpl.id);
